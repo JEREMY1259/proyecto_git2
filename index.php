@@ -5,99 +5,155 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CRUD - Minimal Dashboard</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #f9fafb;
-      color: #1f2937;
-      padding: 24px;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-    h1 {
-      font-weight: 600;
-      font-size: 28px;
-      color: #1e3a8a;
-    }
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-align: center;
-      text-decoration: none;
-      color: #1f2937;
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .card h2 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-top: 10px;
-      color: #1e40af;
-    }
-    .panel {
-      background: white;
-      border-radius: 10px;
-      padding: 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-    .panel h2 {
-      font-size: 18px;
-      margin-bottom: 16px;
-      color: #1e3a8a;
-      font-weight: 600;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px 12px;
-      margin: 6px 0;
-      border: 1px solid #d1d5db;
-      border-radius: 6px;
-      font-family: inherit;
-    }
-    input:focus {
-      outline: none;
-      border-color: #3b82f6;
-    }
-    button {
-      background: #1e40af;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    button:hover {
-      background: #1e3a8a;
-    }
-    .delete-btn {
-      background: #b91c1c;
-    }
-    .delete-btn:hover {
-      background: #991b1b;
-    }
-  </style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #f1f5f9;
+    padding: 24px;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 32px;
+    background: linear-gradient(90deg, #60a5fa, #93c5fd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+  }
+
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+
+  .card {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    text-decoration: none;
+    color: #e2e8f0;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(96, 165, 250, 0.5);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 12px;
+    color: #cbd5e1;
+  }
+
+  .panel {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(100, 116, 139, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .panel h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #93c5fd;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  input, button {
+    width: 100%;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    background: rgba(30, 41, 59, 0.8);
+    color: #f1f5f9;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  input::placeholder {
+    color: #94a3b8;
+  }
+
+  input:focus {
+    outline: 2px solid #60a5fa;
+    background: rgba(30, 41, 59, 1);
+  }
+
+  button {
+    background: linear-gradient(120deg, #3b82f6, #1d4ed8);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(120deg, #2563eb, #1e40af);
+  }
+
+  .delete-btn {
+    background: linear-gradient(120deg, #ef4444, #b91c1c);
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+  }
+
+  .delete-btn:hover {
+    background: linear-gradient(120deg, #dc2626, #991b1b);
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+  }
+
+  /* Mensajes de éxito/error (si los agregas después) */
+  .mensaje {
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+  }
+  .exito { background: rgba(16, 185, 129, 0.2); color: #a7f3d0; border: 1px solid #059669; }
+  .error { background: rgba(220, 38, 38, 0.2); color: #fca5a5; border: 1px solid #b91c1c; }
+</style>
 </head>
 <body>
   <div class="container">
