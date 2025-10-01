@@ -5,155 +5,161 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CRUD - Minimal Dashboard</title>
   <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: #f1f5f9;
-    padding: 24px;
-    min-height: 100vh;
-  }
+    body {
+      font-family: 'Orbitron', 'Courier New', monospace;
+      background: #0a0a0f;
+      color: #e0e0ff;
+      padding: 24px;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(128, 0, 128, 0.15) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(0, 200, 255, 0.1) 0%, transparent 20%);
+    }
 
-  .container {
-    max-width: 920px;
-    margin: 0 auto;
-  }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-  header {
-    text-align: center;
-    margin-bottom: 36px;
-  }
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    }
 
-  h1 {
-    font-weight: 700;
-    font-size: 32px;
-    background: linear-gradient(90deg, #60a5fa, #93c5fd);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    letter-spacing: -0.5px;
-  }
+    h1 {
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: #ff00ff;
+      text-transform: uppercase;
+    }
 
-  .menu {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    margin-bottom: 36px;
-  }
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 18px;
+      margin-bottom: 36px;
+    }
 
-  .card {
-    background: rgba(30, 41, 59, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 24px;
-    text-align: center;
-    text-decoration: none;
-    color: #e2e8f0;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
+    .card {
+      background: rgba(10, 10, 20, 0.7);
+      border: 1px solid #ff00ff;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #00ffff;
+      transition: all 0.3s;
+      box-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
 
-  .card:hover {
-    transform: translateY(-4px);
-    background: rgba(30, 41, 59, 0.8);
-    border-color: rgba(96, 165, 250, 0.5);
-    color: #ffffff;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
+      z-index: -1;
+      animation: borderGlow 3s linear infinite;
+      opacity: 0.6;
+    }
 
-  .card h2 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 12px;
-    color: #cbd5e1;
-  }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+      color: white;
+    }
 
-  .panel {
-    background: rgba(15, 23, 42, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 28px;
-    border: 1px solid rgba(100, 116, 139, 0.3);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  }
+    .card h2 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 10px;
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff;
+    }
 
-  .panel h2 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #93c5fd;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+    .panel {
+      background: rgba(15, 15, 30, 0.85);
+      border: 1px solid #00ffff;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+    }
 
-  input, button {
-    width: 100%;
-    padding: 12px 16px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 15px;
-    background: rgba(30, 41, 59, 0.8);
-    color: #f1f5f9;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-  }
+    .panel h2 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: #ff00ff;
+      font-weight: 700;
+      text-shadow: 0 0 6px #ff00ff;
+    }
 
-  input::placeholder {
-    color: #94a3b8;
-  }
+    input, button {
+      width: 100%;
+      padding: 10px 12px;
+      margin: 6px 0;
+      border: 1px solid #00ffff;
+      border-radius: 4px;
+      font-family: 'Orbitron', monospace;
+      background: rgba(0, 0, 10, 0.6);
+      color: #00ffff;
+      outline: none;
+      box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.3);
+    }
 
-  input:focus {
-    outline: 2px solid #60a5fa;
-    background: rgba(30, 41, 59, 1);
-  }
+    input::placeholder {
+      color: #6666aa;
+    }
 
-  button {
-    background: linear-gradient(120deg, #3b82f6, #1d4ed8);
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
-  }
+    input:focus {
+      border-color: #ff00ff;
+      box-shadow: inset 0 0 8px rgba(255, 0, 255, 0.6), 0 0 8px rgba(255, 0, 255, 0.4);
+    }
 
-  button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
-    background: linear-gradient(120deg, #2563eb, #1e40af);
-  }
+    button {
+      background: linear-gradient(to right, #ff00ff, #9900cc);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
 
-  .delete-btn {
-    background: linear-gradient(120deg, #ef4444, #b91c1c);
-    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
-  }
+    button:hover {
+      box-shadow: 0 0 15px #ff00ff;
+      transform: translateY(-2px);
+    }
 
-  .delete-btn:hover {
-    background: linear-gradient(120deg, #dc2626, #991b1b);
-    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
-  }
+    .delete-btn {
+      background: linear-gradient(to right, #ff0055, #cc0044);
+    }
 
-  /* Mensajes de éxito/error (si los agregas después) */
-  .mensaje {
-    padding: 12px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: 500;
-  }
-  .exito { background: rgba(16, 185, 129, 0.2); color: #a7f3d0; border: 1px solid #059669; }
-  .error { background: rgba(220, 38, 38, 0.2); color: #fca5a5; border: 1px solid #b91c1c; }
-</style>
+    .delete-btn:hover {
+      box-shadow: 0 0 15px #ff0055;
+    }
+
+    @keyframes borderGlow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    /* Fallback para fuentes */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
 </head>
 <body>
   <div class="container">
